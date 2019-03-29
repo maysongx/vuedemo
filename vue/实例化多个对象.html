@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>实例化多个对象</title>
+    <meta name="keywords" content="keywords"/>
+    <meta name="description" content="description"/>
+    <script type="text/javascript" src="/vue/js/vue/vue.js"></script>
+</head>
+<body>
+<h1>实例化多个vue对象</h1>
+<div id="demo">
+    <button @click="changeShow('one')">show one</button>
+    <button @click="changeShow('two')">show two</button>
+</div>
+
+<div v-show="isShow" id="vue-app-one">
+    <h1>{{title}}</h1>
+    <p>{{greet}}</p>
+</div>
+<div v-show="isShow" id="vue-app-two">
+    <h1>{{title}}</h1>
+    <p>{{greet}}</p>
+</div>
+
+
+<script type="text/javascript" src="/vue/js/demo4.js"></script>
+</body>
+</html>

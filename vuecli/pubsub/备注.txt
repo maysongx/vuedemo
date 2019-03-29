@@ -1,0 +1,9 @@
+消息的订阅与发布，需要安装PubSubJS库,可以实现任意组件之间的通信
+安装：cnpm install --save-dev pubsub-js
+如果安装成功，可以查看信息 cnpm info pubsub-js
+
+绑定事件监听--订阅消息
+触发事件--发布消息 
+
+订阅消息：PubSub.subscribe('事件名',function(msg,data){})  data就是参数
+发布消息：PubSub.publish('事件名',data)

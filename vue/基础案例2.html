@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Vue简单案例演示</title>
+    <meta name="keywords" content="keywords"/>
+    <meta name="description" content="description"/>
+    <script type="text/javascript" src="/vue/js/vue/vue.min.js"></script>
+    <style>
+        #canvas {
+            width: 600px;
+            padding: 200px 20px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        span{
+            display: inline-block;
+            background-color: green;
+            padding: 20px;
+            color: white;
+        }
+        .changeColor{
+            background-color: red;
+        }
+        .changeLength:after{
+            content: 'length';
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="demo2" style="width: 1200px;margin: 0 auto">
+    <input type="text" v-model="name">
+    <h1>{{name}}</h1>
+    <h1>{{greet('morning')}}</h1>
+    <a :href="website">百度一下</a>
+    <p v-html="websiteTag">在P标签内部插入a标签</p>
+    <h1>Events 事件：</h1>
+    <button @click="add">涨一岁</button>
+    <button @click="reduce">减一岁</button>
+    <h1>My age is {{age}}</h1>
+    <div id="canvas" @mousemove="updateXY">
+        <!--stop 事件修饰符 阻止冒泡事件-->
+        {{x}},{{y}}----<span @mousemove.stop="">stop Moving</span>
+    </div>
+    <h1>
+        <a :href="website" @click.prevent="alert()">事件修饰符--阻止默认事件</a>
+    </h1>
+    <h1>键盘events</h1>
+    <lable>姓名：</lable>
+    <input ref="name" type="text" @keyup.enter="logName">
+    <lable>年龄：</lable>
+    <input ref="age" type="text" @keyup.enter="logAge">
+    <h1>计算属性computed</h1>
+    <button @click="a++">Add to A</button>
+    <button @click="b++">Add to B</button>
+    <p>A：{{a}} B：{{b}}</p>
+    <p>A+Age={{AddToA()}}</p>
+    <p>B+Age={{AddToB()}}</p>
+
+    <p>A+Age={{AddToAComputed}}</p>
+    <p>B+Age={{AddToBComputed}}</p>
+    <p>绑定样式</p>
+    <h1>点击 更换颜色</h1>
+    <div>
+        <span @click="changeColor=!changeColor" v-bind:class="{changeColor:changeColor}">song</span>
+    </div>
+    <button @click="changeColor=!changeColor">change color</button>
+    <button @click="changeLength=!changeLength">change length</button>
+    <div>
+        <span v-bind:class="computedClass">Song</span>
+    </div>
+    <h1>v-for遍历</h1>
+    <ul>
+        <li v-for="(m,index) in dataArray">{{index}}--{{m}}</li>
+    </ul>
+    <ul>
+        <li v-for="(m,index) in dataObj">
+            {{index}}--{{m.name}}--{{m.age}}
+        </li>
+    </ul>
+
+    <template v-for="(m,index) in dataObj">
+        <div class="perItem">
+            <h1>{{index}}.{{m.name}}</h1>
+            <p>{{m.age}}</p>
+        </div>
+    </template>
+    <template v-for="(m,index) in dataObj">
+        <div v-for="(val,key) in m">
+            <h1>{{key}}--{{val}}</h1>
+        </div>
+    </template>
+
+    <!--遍历对象 回去key和value-->
+    <div v-for="(val,key) in obj">
+        遍历对象：（获取key和value） <h1>{{key}}--{{val}}</h1>
+    </div>
+
+</div>
+<script type="text/javascript" src="/vue/js/demo2.js"></script>
+</body>
+</html>

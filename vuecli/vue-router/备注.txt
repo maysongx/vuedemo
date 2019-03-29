@@ -1,0 +1,87 @@
+中文文档使用
+https://router.vuejs.org/zh/
+ 
+ 下载
+ cnpm install vue-router --save-dev
+ 
+ 相关API说明
+ VueRouter()：用于常见路由器的构造函数
+	new VueRouter({
+		配置路由
+	})
+	
+	路由配置
+	routes:[
+		{
+			//一般路由
+			path:'/about',
+			component:About
+		},
+		{
+			//自由跳转路由
+			path:'/',
+			redirect:'/about'
+		}
+	]
+	
+	注册路由器
+	import router from './router'
+	new Vue({
+		router
+	})
+	
+	使用路由组件标签
+	router-link：用来生成路由链接
+		<router-link :to="/XXX">GO To XXX</router-link>
+	router-view：用来显示当前路由组件界面
+		<router-view></router-view>	
+		
+		
+//跳转到上一次浏览器页面（浏览器的回退按钮）		
+this.$router.go(-1)		
+//请求下一个记录路由
+this.$router.go(1) 
+//请求(返回)上一个记录路由
+this.$router.back(): 
+//跳转到指定的地址  用新路由替换当前路由(不可以返回到当前路由界面)
+this.$router.replace('/home')	
+//跳转到指定的路由地址
+this.$router.replace({name:'homeLink'})	
+通过push页面跳转（推荐）  相当于点击路由链接(可以返回到当前路由界面)
+this.$router.push('/home')	
+this.$router.push({name:'homeLink'})	
+
+
+实际开发过程中，会有2中类型的组件：
+路由组件(views/pages)和非路由组件（components）
+
+
+配置对象的属性名一般都是确定的，最好不要随便修改
+
+缓存路由组件对象
+1) 默认情况下, 被切换的路由组件对象会死亡释放, 再次回来时是重新创建的
+2) 如果可以缓存路由组件对象, 可以提高用户体验
+
+实现：
+<keep-alive>
+	<router-view></router-view>
+</keep-alive>
+
+
+如何向路由组件传递数据
+方法一：路由路径携带参数（param/query）
+1. 配置路由
+children: [
+	{
+		path: 'mdetail/:id',  //传递参数id
+		component: MessageDetail
+	}
+	]
+2. 路由路径
+<router-link :to="'/home/message/mdetail/'+m.id">{{m.title}}</router-link>
+3. 路由组件中读取请求参数
+	 this.$route.params.id	
+	
+方法二：<router-view></router-view>属性携带数据
+	     <router-view :msg='msg'></router-view>
+接收的组件使用props声明，即可立即使用			 

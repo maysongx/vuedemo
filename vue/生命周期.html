@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期</title>
+    <script type="text/javascript" src="/vue/js/vue/vue.js"></script>
+</head>
+<body>
+<div id="test">
+    <button @click="destoryVM">销毁vm实例</button>
+    <!--每隔一秒钟循环显示/隐藏-->
+    <p v-show="isShow">Vue 学习</p>
+</div>
+
+<script>
+    new Vue({
+        el: '#test',
+        data: {
+            isShow: true
+        },
+        //mounted：初始化显示后立即调用
+        mounted() {
+            this.intervalID = setInterval(() => {
+                console.log('程序运行中...')
+                this.isShow = !this.isShow;
+            }, 1000);
+        },
+        //销毁实例之前调用一次
+        beforeDestory() {
+            console.log("beforeDestory");
+            //清除定时器
+            clearInterval(this.intervalID)
+        },
+
+        destoryed() {
+            console.log("destoryed阶段")
+        },
+        methods: {
+            destoryVM() {
+                //销毁VM实例,VM中的数据不可以再使用，但是定时器还在运行（内存泄露）
+                this.$destroy();
+            }
+        }
+    })
+</script>
+</body>
+</html>
+

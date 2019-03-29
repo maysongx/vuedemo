@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件的封装</title>
+</head>
+<body>
+<div id="demo">
+    <h1>在input中输入内容，并按键enter</h1>
+
+    <!--传参  placeholder和title都是传入的参数变量==直接传入字符串-->
+    <todo placeholder="请输入您的内容，在input1中" title="我是标题title1"></todo>
+
+    <!--传参  :placeholder和:title都是传入的参数变量==传入变量-->
+    <todo :placeholder="placeholderText2" :title="title2"></todo>
+
+</div>
+<script type="text/javascript" src="/vue/js/vue/vue.js"></script>
+<script>
+    //全局组件的构建
+    Vue.component("todo", {
+        // props: ["text",'title'],  //没有验证类型
+        //要求类型验证
+        props: {
+            placeholder: String,
+            title: [Number, String]
+        },
+        template: `
+        <div class="perItem" style="margin: 20px auto;overflow: hidden;">
+             <input type="text" v-model="val" :title="title" :placeholder="placeholder" @keyup.enter="print" />
+             <ul>
+                <li v-for="m in attr">{{m}}</li>
+             </ul>
+        </div>
+      `,
+        data: function () {
+            return {
+                val: '',
+                attr: []
+            }
+        },
+        methods: {
+            print: function () {
+                //将input中的值加入数组
+                this.attr.push(this.val);
+            }
+        }
+    });
+    new Vue({
+        el: '#demo',
+        data: {
+            placeholderText2: "请输入您的内容，在input2中",
+            title2: '我是标题title2',
+        }
+    });
+</script>
+</body>
+</html>

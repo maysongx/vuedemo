@@ -1,0 +1,12 @@
+Vue UI常用的组件库
+
+mint-ui  http://mint-ui.github.io/#!/zh-cn
+备注：饿了么开源的基于 vue 移动端 UI 组件库
+Elment    http://element-cn.eleme.io/#/zh-CN
+备注：饿了么开源的基于 vue 的 PC 端 UI 组件库
+
+使用
+1. 下载 
+cnpm install --save-dev mint-ui
+按需引入（按需使用组件需要下载的包）
+cnpm install --save-dev babel-plugin-component

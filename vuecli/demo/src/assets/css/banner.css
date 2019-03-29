@@ -1,0 +1,70 @@
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/summerSongXia\.github\.io\/vuecli\/demo\/src\/assets\/css\/public\.scss}line{font-family:\000031}}
+body {
+  padding: 0;
+  margin: 0;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/summerSongXia\.github\.io\/vuecli\/demo\/src\/assets\/css\/public\.scss}line{font-family:\000035}}
+ul, li {
+  list-style-type: none;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/summerSongXia\.github\.io\/vuecli\/demo\/src\/assets\/css\/public\.scss}line{font-family:\000038}}
+.clear {
+  clear: both;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/summerSongXia\.github\.io\/vuecli\/demo\/src\/assets\/css\/public\.scss}line{font-family:\00003102}}
+body {
+  background-color: #fafafa;
+  margin: 0;
+  padding: 0;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/summerSongXia\.github\.io\/vuecli\/demo\/src\/assets\/css\/banner\.scss}line{font-family:\000034}}
+.banner {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 420px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/summerSongXia\.github\.io\/vuecli\/demo\/src\/assets\/css\/banner\.scss}line{font-family:\000037}}
+.banner .swiper-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 420px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/summerSongXia\.github\.io\/vuecli\/demo\/src\/assets\/css\/banner\.scss}line{font-family:\0000311}}
+.banner .swiper-container .swiper-wrapper .swiper-slide {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 420px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/summerSongXia\.github\.io\/vuecli\/demo\/src\/assets\/css\/banner\.scss}line{font-family:\0000316}}
+.banner .swiper-container .swiper-wrapper .swiper-slide img {
+  width: 100%;
+  height: 420px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/summerSongXia\.github\.io\/vuecli\/demo\/src\/assets\/css\/banner\.scss}line{font-family:\0000322}}
+.banner .swiper-container .swiper-pagination-bullet {
+  background: white;
+  width: 20px;
+  height: 20px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/summerSongXia\.github\.io\/vuecli\/demo\/src\/assets\/css\/banner\.scss}line{font-family:\0000326}}
+.banner .swiper-container .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: #007aff;
+}

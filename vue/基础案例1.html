@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-us" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Vue简单案例演示</title>
+    <meta name="keywords" content="关键字"/>
+    <meta name="description" content="描述"/>
+    <style>
+        body {
+            font-size: 14px;
+            font-family: '微软雅黑';
+        }
+
+        .perItem {
+            margin-bottom: 30px;
+            border: 1px red solid;
+            padding: 20px;
+        }
+
+        .active {
+            width: 200px;
+            height: 100px;
+            font-size: 20px;
+            color: white;
+            display: block;
+            background: red;
+        }
+
+        .title {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+<div id="demo" style="width: 1200px;margin: 0 auto">
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">文本绑定</div>
+        <div>{{content}}</div>
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">属性绑定</div>
+        <div v-bind:class="{'active':isActive}">给当前div绑定了class类</div>
+        <div v-bind:flag="true">给当前div绑定了flag</div>
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">使用v-html指令输出html代码</div>
+        <div v-html="htmlcode"></div>
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">a标签链接地址的设置（绑定属性）</div>
+        <a v-bind:href="baiduUrl">百度一下</a>
+        <a :href="baiduUrl">百度一下（缩写）</a>
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">显示与隐藏</div>
+        <input type="checkbox" v-model="show">
+        <div v-if="show">使用v-if控制</div>
+        <div v-show="show">使用v-show控制</div>
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">v-model的双向绑定</div>
+        <div>{{name}}</div>
+        <input type="text" v-model.trim="name">
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">click方法 v-on绑定</div>
+        <button v-on:click="sayHello('宋宋宋')">点击问候</button>
+        <button @click="sayHello('宋宋宋')">点击问候（缩写）</button>
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">获取对象里面的值</div>
+        <div>{{objInfo.title}}</div>
+        <div>{{objInfo.site}}</div>
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">vue.set的使用</div>
+        <div>初始值：{{count}}</div>
+        <button @click="addCount">点击我，数字会增加</button>
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">过滤器：格式化文本</div>
+        <div>{{messageInfo|UpperCase}}</div>
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">v-if条件判断</div>
+        <input type="checkbox" v-model="show">
+        <templete v-if="show">
+            <p>数据1 show为true</p>
+            <p>数据2 show为true</p>
+            <p>数据3 show为true</p>
+        </templete>
+        <templete v-else="show">
+            <p>数据1 show为false</p>
+            <p>数据2 show为false</p>
+            <p>数据3 show为false</p>
+        </templete>
+        <div v-if="type==='A'">
+            A
+        </div>
+        <div v-else-if="type==='B'">
+            B
+        </div>
+        <div v-else-if="type==='C'">
+            C
+        </div>
+        <div v-else>
+            nothing
+        </div>
+
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">for循环</div>
+
+        <div v-bind:class="classArray.title">迭代数组</div>
+        <div v-for="m in array">{{m.name}}</div>
+
+        <div v-bind:class="classArray.title">迭代对象</div>
+        <div v-for="m in objInfo">{{m}}</div>
+        <div v-for="(value,key,index) in objInfo">{{index}}.{{key}}:{{value}}</div>
+        <div v-bind:class="classArray.title">迭代json对象</div>
+
+        <template v-for="m in jsonObj">
+            <p>{{m.name}}:{{m.age}}</p>
+        </template>
+
+        <div v-bind:class="classArray.title">迭代整数</div>
+        <div v-for="n in 10">{{n}}</div>
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">计算属性</div>
+        <div>原字符串：{{messageInfo}}</div>
+        <div>反转字符串：{{reversedMessageInfo}}</div>
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">监听属性watch</div>
+        千米： <input type="text" v-model="kilometers">
+        米：<input type="text" v-model="meters">
+        <div id="showValue"></div>
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">样式绑定</div>
+
+        <div v-bind:class="{active:isActive,show:show}">如果isActive为true,给当前div添加active类</div>
+
+        <div class="static" v-bind:class="classObj">绑定一个对象，拥有对象里面所有的类</div>
+
+        <div v-bind:class="[activeClass,errorClass]">数组绑定</div>
+
+        <div v-bind:style="classObjStyle">绑定到样式对象</div>
+
+        <div v-bind:style="{color:color,fontSize:fontsize+'px'}">内联样式</div>
+
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">事件处理器</div>
+        <button v-on:click="greet">点击触发greet</button>
+
+        <a v-on:click.stop="doThis">阻止单击事件冒泡</a>
+        <a v-on:click.once="doThis">click事件只能点击一次</a>
+        <form v-on:submit.prevent="onSubmit">提交事件不再重载页面</form>
+        <div v-on:click.self="doThat">只当事件在该元素本身（而不是子元素）触发时触发回调</div>
+        <div v-on:click.capture="doThis">添加事件侦听器时使用事件捕获模式</div>
+
+        <input v-on:keyup.enter="submit">
+        <input @keyup.enter="submit">
+
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">表单</div>
+        <div v-bind:class="classArray.title">输入框input和textarea的双向绑定</div>
+        <input type="text" v-model="name" placeholder="请输入您的用户名"><br/>
+        <textarea v-model="name" placeholder="多行编辑器"></textarea>
+        <br/>
+        <span>{{name}}</span>
+        <div v-bind:class="classArray.title">复选框chekbox</div>
+        <p>单个复选框</p>
+        <input type="checkbox" v-model="show">
+        <lable>是否选中：{{show}}</lable>
+        <p>多个复选框</p>
+        <input type="checkbox" value="宋" v-model="checkBoxArray">
+        <lable>宋</lable>
+        <input type="checkbox" value="王" v-model="checkBoxArray">
+        <lable>王</lable>
+        <input type="checkbox" value="刘" v-model="checkBoxArray">
+        <lable>刘</lable>
+        <br/>
+        <span>选中的是：{{checkBoxArray}}</span>
+        <div v-bind:class="classArray.title">单选按钮radio</div>
+        <input type="radio" value="宋" v-model="radioArray">
+        <lable>宋</lable>
+        <input type="radio" value="刘" v-model="radioArray">
+        <lable>刘</lable>
+        <input type="radio" value="王" v-model="radioArray">
+        <lable>王</lable>
+        <br/>
+        <span>选中的是：{{radioArray}}</span>
+        <div v-bind:class="classArray.title">下拉列表select</div>
+        <select name="" v-model="selectedArray">
+            <option value="">选中一个吧</option>
+            <option value="宋">宋</option>
+            <option value="王">王</option>
+            <option value="刘">刘</option>
+        </select>
+        <br/>
+        <span>选中的是：{{selectedArray}}</span>
+        <div v-bind:class="classArray.title">全选与取消全选demo</div>
+        <input type="checkbox" v-model="checked" @change="changeAllChecked()">
+        <lable>全选：{{checked}}</lable>
+        <br/>
+        <input type="checkbox" value="宋" v-model="checkedNames">
+        <lable>宋</lable>
+        <input type="checkbox" value="王" v-model="checkedNames">
+        <lable>王</lable>
+        <input type="checkbox" value="刘" v-model="checkedNames">
+        <lable>刘</lable>
+        <br/>
+        <lable>您选中的：{{checkedNames}}</lable>
+    </div>
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">组件</div>
+        <p>全局组件：：</p>
+        <globalComponent></globalComponent>
+        <p>局部组件：：</p>
+        <childComponent></childComponent>
+    </div>
+
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title">自定义指令</div>
+        <p>页面载入时，input元素自动获取焦点</p>
+        <input v-focus>
+    </div>
+
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title" >即时输入并打印数据（按enter键添加并打印）</div>
+        <input type="text" v-model="val" v-on:keyup.enter="print()">
+        <!--<input type="text" v-model="val" v-on:keyup.13="print()">-->
+        <ul>
+            <li v-for="item in attr">{{item}}</li>
+        </ul>
+    </div>
+
+
+    <div v-bind:class="classArray.perItem">
+        <div v-bind:class="classArray.title"></div>
+    </div>
+
+    <img src="/vue/images/小demo.png"/>
+</div>
+<script type="text/javascript" src="/vue/js/vue/vue.js"></script>
+<script type="text/javascript" src="/vue/js/demo.js"></script>
+</body>
+</html>

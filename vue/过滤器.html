@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器</title>
+    <script type="text/javascript" src="/vue/js/vue/vue.js"></script>
+    <script type="text/javascript" src="/vue/js/moment.min.js"></script>
+</head>
+<body>
+<div id="test">
+    <h2>显示格式化的日期时间</h2>
+    <p>年-月-日 时:分:秒==={{date | dateString}}</p>
+    <p>年-月-日==={{date | dateString('YYYY-MM-DD')}}</p>
+    <p>时:分:秒==={{date | dateString('HH:mm:ss')}}</p>
+</div>
+
+<script>
+    /*
+    * 过滤器的主要功能是对要操作的数据进行格式化设置
+    *
+    * 定义过滤器
+    *   Vue.filter(filterName,function(value[,arg1,arg2,...]){
+    *           //进行数据处理
+    *            return newValue
+    *   })
+    *
+    * 使用过滤器
+    *   <p>{{maData|filterName}}</p>
+    *   <p>{{maData|filterName(arg)}}</p>
+    * */
+
+    //自定义一个过滤器
+    Vue.filter('dateString', function (value, format) {
+        // value的值就是this.date的值 {{date|dateString}}传值
+        //format是参数
+        //moment().format('MMMM Do YYYY, h:mm:ss a') 如果不传参，默认是对当前时间格式化
+        return format ? moment(value).format(format) : moment(value).format('YYYY-MM-DD HH:mm:ss');
+        //或者是下面的写法 更加简洁
+        //return moment(value).format(format||'YYYY-MM-DD HH:mm:ss');
+    });
+
+    // //使用ES6语法，设置默认值
+    // Vue.filter('dateString', function (value, format='YYYY-MM-DD HH:mm:ss') {
+    //     return  moment(value).format(format);
+    // });
+    new Vue({
+        el: '#test',
+        data: {
+            date: new Date()
+        }
+    })
+
+</script>
+</body>
+</html>
+

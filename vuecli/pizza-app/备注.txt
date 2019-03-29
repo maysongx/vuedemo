@@ -1,0 +1,14 @@
+Login.vue 登录（单页面组件）
+Register.vue 注册（单页面组件）
+Menu.vue 菜单管理（单页面组件）
+Admin.vue 菜单管理（单页面组件）
+
+Home.vue 首页（路由跳转功能  this.$router.push({name: 'menuLink'})）
+Header.vue 页面头部（配置导航）
+
+
+router-link默认html解析成a标签；如果要修改为div标签，只需要添加属性tag="div"
+<router-link to="/menu"  tag="div"  class="nav-link">菜单</router-link>
+
+绑定链接 :to接收链接
+<router-link :to="{name:'homeLink'}" class="nav-link">主页</router-link>

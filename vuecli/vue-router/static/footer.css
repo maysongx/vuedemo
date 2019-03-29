@@ -1,0 +1,9 @@
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/summerSongXia\.github\.io\/vuecli\/app3\/static\/footer\.scss}line{font-family:\000032}}
+.nav-footer {
+  display: flex;
+  background-color: #333;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 10px 0px;
+}

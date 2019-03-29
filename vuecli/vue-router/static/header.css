@@ -1,0 +1,18 @@
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/summerSongXia\.github\.io\/vuecli\/app3\/static\/header\.scss}line{font-family:\000032}}
+.nav-header {
+  display: flex;
+  background-color: #333;
+  justify-content: center;
+  align-items: center;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/summerSongXia\.github\.io\/vuecli\/app3\/static\/header\.scss}line{font-family:\000037}}
+.nav-header a {
+  color: white;
+  text-decoration: none;
+  padding: 14px 10px;
+  font-size: 20px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/summerSongXia\.github\.io\/vuecli\/app3\/static\/header\.scss}line{font-family:\0000312}}
+.nav-header a.router-link-exact-active.router-link-active {
+  color: red;
+}

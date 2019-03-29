@@ -1,0 +1,2 @@
+局部安装sass预编译文件，不需要配置
+cnpm install --save-dev node-sass sass-loader
