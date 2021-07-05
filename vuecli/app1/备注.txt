@@ -1,4 +1,0 @@
-主要功能点：
-ajax请求数据：this.$http.get(url).then(function(response)){}
-使用vue-router设置路由
-操作列表

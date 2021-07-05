@@ -1,7 +1,0 @@
-vue中常用的2个ajax库：vue-resource和axios
-vue-resource ： vue 插件, 非官方库, vue1.x 使用广泛
-axios ： 通用的 ajax 请求库, 官方推荐, vue2.x 使用广泛
-
-使用步骤：
-1. 安装库文件
-cnpm install --save-dev vue-resource axios
