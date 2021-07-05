@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>实例化多个对象-tab切换</title>
+		<script type="text/javascript" src="lib/vue.js"></script>
+	</head>
+	<body>
+		<div id="demo">
+			<button @click="changeShow('1')">show one</button>
+			<button @click="changeShow('2')">show two</button>
+		</div>
+		
+		<!-- 展示一 -->
+		<div v-show="isShow" id="vue-app-one">
+			<h1>{{title}}</h1>
+			<p>{{greet}}</p>
+		</div>
+		
+		<!-- 展示二 -->
+		<div v-show="isShow" id="vue-app-two">
+			<h1>{{title}}</h1>
+			<p>{{greet}}</p>
+		</div>
+
+
+		<script type="text/javascript">
+			var demo = new Vue({
+				el: '#demo',
+				data: {},
+				methods: {
+					changeShow: function(obj) {
+						oneVM.isShow = false;
+						twoVM.isShow = false;
+						if (obj == '1') {
+							oneVM.isShow = true;
+						} else {
+							twoVM.isShow = true;
+						}
+					}
+				}
+			})
+
+			var oneVM = new Vue({
+				el: '#vue-app-one',
+				data: {
+					title: 'vue app one的内容',
+					isShow: true
+				},
+				computed: {
+					greet: function() {
+						return "Hello App One"
+					}
+				}
+			})
+
+			var twoVM = new Vue({
+				el: '#vue-app-two',
+				data: {
+					title: 'vue app two的内容',
+					isShow: false
+				},
+				computed: {
+					greet: function() {
+						return "Hello App Two"
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

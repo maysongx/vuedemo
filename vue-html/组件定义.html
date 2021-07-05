@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>组件基础定义</title>
+		<script type="text/javascript" src="lib/vue.js"></script>
+	</head>
+	<body>
+		<h1>组件基础定义</h1>
+		<div id="one">
+			<greeting></greeting>
+		</div>
+		<div id="two">
+			<greeting></greeting>
+		</div>
+
+		<!--  
+		  组件其实就是一个特殊的 Vue 实例，可以有自己的 data、methods、computed、watch 等等选项
+		
+			3. 组件的模板 template ：注意：只能有一个根元素，否则警告报错
+					3.1 template 可以是字面量字符串，缺点是没有高亮，内置在 JavaScript 中，写起来麻烦
+					<script type="text/template" id="tplblock">
+								<h2>template模板卸载javascripe中</h2>
+					</script>
+					
+					// 使用
+					template:'#tplblock'
+					
+					
+					3.2 template 可以写在 script 标签中，虽然解决了高亮的问题，但是也麻烦
+					3.3 以上方式都不好，我们最终的解决方案是使用 Vue 的 .vue 单文件组件来写。
+					    但是要想使用这种方式必须结合一些构建工具
+		 
+		 -->
+
+		<script type="text/javascript">
+			Vue.component('greeting', {
+				// template里面的html结构，必须包裹在 父容器中
+				template: `
+							 <p class="box">
+										 <span>大家好，我是{{name}}，请多多指教</span>
+										 <button @click="changeName">改名</button>
+							 </p>
+	     `,
+				// data是一个函数，必须有返回值，返回值是一个对象
+				data: function() {
+					return {
+						name: 'hello vue.js'
+					}
+				},
+				methods: {
+					changeName: function() {
+						this.name = "new hello vue.js "
+					}
+				}
+			});
+
+			// 初始化实例
+			var oneVM = new Vue({
+				el: '#one',
+			});
+
+			var twoVM = new Vue({
+				el: '#two',
+			});
+		</script>
+	</body>
+</html>

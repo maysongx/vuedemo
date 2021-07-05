@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>表单的基础使用</title>
+  <style>
+    .item {
+      width: 500px;
+      display: flex;
+      margin: 10px auto;
+    }
+    .item span {
+      text-align: right;
+      width: 90px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div id="form">
+  <!--@submit.prevent阻止默认行为，就不会自动提交表单action-->
+  <form action="" @submit.prevent="handelSubmit">
+    <div class="item">
+      <span>用户名：</span>
+      <input type="text" v-model="username">
+    </div>
+    <div class="item">
+      <span>密码：</span>
+      <input type="password" v-model="pwd">
+    </div>
+    <div class="item">
+      <span>性别：</span>
+      <input type="radio" value="女" id="female" name="sex" v-model="sex">
+      <label for="female">女</label>
+      <input type="radio" value="男" id="male" name="sex" v-model="sex">
+      <label for="male">男</label>
+    </div>
+    <div class="item">
+      <span>爱好：</span>
+      <input type="checkbox" id="basket" value="篮球" name="hobby" v-model="hobbyArray">
+      <label for="basket">篮球</label>
+      <input type="checkbox" id="foot" value="足球" name="hobby" v-model="hobbyArray">
+      <label for="foot">足球</label>
+      <input type="checkbox" id="reading" value="阅读" name="hobby" v-model="hobbyArray">
+      <label for="reading">阅读</label>
+      <input type="checkbox" id="pingpang" value="乒乓球" name="hobby" v-model="hobbyArray">
+      <label for="pingpang">乒乓球</label>
+    </div>
+    <div class="item">
+      <span>城市：</span>
+      <select name="" id="" v-model="city">
+        <option value="">请选择</option>
+        <option :value="city.id" :key="index" v-for="(city,index) in allCitys">
+          {{city.name}}
+        </option>
+      </select>
+    </div>
+    <div class="item">
+      <span>自我介绍：</span>
+      <textarea rows="6" v-model="introductions"></textarea>
+    </div>
+    <div class="item"><input type="submit" value="注册"></div>
+  </form>
+</div>
+<script type="text/javascript" src="lib/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '#form',
+    data: {
+      username: '',
+      pwd: '',
+      sex: '男',//radio单选 获取value的值
+      hobbyArray: [], //checkbox 如果是一个值，设置为boolean；如果是多个，设置为数组
+      allCitys: [
+        {id: 'beijing', name: '北京'},
+        {id: 'shanghai', name: '上海'},
+        {id: 'guangzhou', name: '广州'},
+        {id: 'shenzhen', name: '深圳'}
+      ],
+      city: 'shanghai',//select下拉框 获取option中的value值
+      introductions: ''
+    },
+    methods: {
+      handelSubmit() {
+        // 解构赋值
+        const {username, pwd, sex, hobbyArray, city, introductions} = this;
+        alert(username + ';' + pwd + ';' + sex + ';' + hobbyArray + ';' + city + ';' + introductions);
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>自定义指令</title>
+		<meta name="keywords" content="关键字" />
+		<meta name="description" content="描述" />
+		<style>
+			/* 防止闪现 */
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="demo" style="width: 1200px;margin: 0 auto">
+			<p>页面载入时，input自动获取焦点</p>
+			<input type="text" v-focus placeholder="页面载入时，自动获取焦点">
+
+			<p v-upper-case-text="msg">转换为大写的字母：{{msg}}</p>
+			<p v-lower-case-text="msg">转换为小写的字母：{{msg}}</p>
+
+			<!--ref设置唯一标识-->
+			<h2 ref="pCont">通过v-text获取内容数据</h2>
+			<button @click="getCont">点击获取内容数据</button>
+
+			<!--
+					v-clack防止闪现
+					第一次加载的时候，页面是显示{{msg}},需要等待解析完毕再显示相应的内容
+					如果加上v-cloak指令，那么他就会在解析完毕以后才会显示相应的内容
+    -->
+			<h2 v-cloak>{{msg}}</h2>
+		</div>
+		<script type="text/javascript" src="lib/vue.js"></script>
+		<script>
+			/*
+			 * 注意：指令名不可以大写 类似这种方式：caseName
+			 * 注册全局指令
+			 * Vue.directive("my-directive-name",function(el,binding){
+			 *       el.innerHTML=binding.value.toupperCase()
+			 * })
+			 *
+			 * 注册局部指令
+			 * directives:{
+			 *   'my-directive-name':function(el,binding){
+			 *        el.innerHTML=binding.value.toupperCase()
+			 *   }
+			 * }
+			 *
+			 * 使用指令
+			 * my-directive-name=XXX
+			 *
+			 * */
+
+			//自定义一个全局指令，获取元素的焦点
+			Vue.directive('focus', {
+				// 被绑定元素插入父节点时调用
+				inserted: function(el) {
+					el.focus(); //获取焦点
+					console.log('inserted');
+				},
+				// 只调用一次，指令第一次绑定到元素时调用（经常用于初始化动作）
+				bind: function(el, binding) {
+					console.log('bind');
+				},
+				// 被绑定元素所在模板完成一次更新时调用，而不论绑定时是否变化
+				update: function() {
+					console.log('update');
+				},
+				// 被绑定元素的所在模板完成一次更新周期时调用
+				componentUpdated: function() {
+					console.log('componentUpdated');
+				},
+				// 只调用一次，指令与元素解绑时调用
+				unbind: function() {
+					console.log('unbind');
+				}
+			});
+			// 大写（这是一种简写的方式）
+			Vue.directive('upper-case-text', function(el, binding) {
+				el.textContent = binding.value.toUpperCase();
+			});
+
+			var vm = new Vue({
+				el: '#demo',
+				data: {
+					msg: 'Hello World'
+				},
+				methods: {
+					getCont() {
+						alert(this.$refs.pCont.textContent);
+					}
+				},
+				directives: {
+					'lower-case-text': {
+						bind: function(el, binding) {
+							el.textContent = binding.value.toLowerCase();
+						}
+					},
+				}
+			});
+		</script>
+	</body>
+</html>

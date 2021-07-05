@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>TodoMVC案例</title>
+		<link rel="stylesheet" href="node_modules/todomvc-common/base.css">
+		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
+	</head>
+	<body>
+		<!--
+		任务列表todos
+		
+		1.  任务项的三个样式
+				未完成：没有样式
+				已完成：completed样式
+				正在编辑：edting样式
+		
+		2. 当todos为空时，不显示 mian 和 footer 区域，建议将 main 和 footer 区域块一起放在一个template中：
+		   因为 v-if 是一个指令，所以必须将它添加到一个元素上。但是如果想切换多个元素呢？此时可以把一个 <template> 元素当做不可见的包裹元素，并在上面使用 v-if。最终的渲染结果将不包含 <template> 元素
+-->
+		<section class="todoapp" id="app">
+			<header class="header">
+				<h1>todos任务</h1>
+				<input class="new-todo" placeholder="输入文本,按enter键创建任务" v-model="todoText" @keyup.enter="handleAddTodo"
+					v-focus>
+			</header>
+			<!-- 如果todos为空时，不显示下面的main,footer区域块 -->
+			<template v-if="todos.length">
+				<section class="main">
+					<input id="toggle-all" class="toggle-all" type="checkbox" v-model="isAllSelected">
+					<!-- 点击 切换  全选  全不选 功能 -->
+					<label for="toggle-all">全选</label>
+					<ul class="todo-list">
+						<!-- 根据 todo.completed 已完成 未完成的样式 -->
+						<li v-for="(todo,index) in filterTodos"
+							:class="{completed:todo.completed,editing:curEditing==todo}">
+							<div class="view">
+								<!-- 根据 todo.completed 属性设置选中 不选中 -->
+								<input class="toggle" type="checkbox" v-model="todo.completed">
+								<!-- 双击 进入编辑模式 -->
+								<!--
+								  当我双击的时候，我就把 currentEditing = 当前双击的这个任务项
+								  每个任务项 class 的 editing 都有一个判定：如果 currentEditing === 我自己 ，则该任务项就获得 editing 样式
+								 -->
+
+								<label @dblclick="handleEditDbclick(todo)">{{todo.title}}</label>
+								<!-- 根据下标删除当前 -->
+								<button @click="handleDelete(index)" class="destroy"></button>
+							</div>
+							<!-- 由于我们还有一个取消编辑不保存的功能，所以我们这里就不使用双向数据绑定
+								   双击的时候，下面的input自动获取焦点
+								-->
+							<input class="edit" :value="todo.title" v-todo-focus="curEditing==todo"
+								@keydown.enter="handleSaveEditKeydown(todo, index, $event)"
+								@blur="handleSaveEditKeydown(todo, index, $event)" @keydown.esc="handleCancelEditEsc">
+						</li>
+					</ul>
+				</section>
+				<footer class="footer">
+					<span class="todo-count"><strong>{{noCompletedCount}}</strong> 项未完成</span>
+					<!-- Remove this if you don't implement routing -->
+					<ul class="filters">
+						<li>
+							<a :class="{selected:this.filterTxt=='all'}" href="#/all">所有</a>
+						</li>
+						<li>
+							<a :class="{selected:this.filterTxt=='active'}" href=" #/active">未完成</a>
+						</li>
+						<li>
+							<a :class="{selected:this.filterTxt=='completed'}" href=" #/completed">已完成</a>
+						</li>
+					</ul>
+					<!-- 如果没有已完成的任务，则不显示	 -->
+					<button v-if="isShowAllClear" class="clear-completed"
+						@click="handleRemoveAllCompleted">删除所有已完成任务</button>
+				</footer>
+			</template>
+		</section>
+		<script src="node_modules/vue/dist/vue.js"></script>
+		<script src="js/app.js"></script>
+	</body>
+</html>

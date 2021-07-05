@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-us" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>todo综合使用</title>
+		<link rel="stylesheet" href="todo.css">
+	</head>
+	<body>
+		<div id="demo">
+			<!--调用组件-->
+			<to_do_list :name="name" placeholdertxt="请输入内容并按键enter添加数据"></to_do_list>
+		</div>
+
+		<script type="text/javascript" src="lib/vue.js"></script>
+		<script type="text/javascript" src="components.js"></script>
+
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#demo',
+				data: {
+					name: '父组件定义的变量name'
+				}
+			})
+		</script>
+	</body>
+</html>

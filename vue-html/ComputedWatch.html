@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>computed计算属性和watch监听属性</title>
+	</head>
+	<body>
+		<div id="demo">
+			姓：<input type="text" placeholder="First Name" v-model="firstName"><br>
+			名：<input type="text" placeholder="Last Name" v-model="lastName"><br>
+			姓名1（计算属性-单向数据绑定）：<input type="text" placeholder="full Name1" v-model="FullName1"><br>
+			姓名2（监听属性-单向数据绑定）：<input type="text" placeholder="full Name2" v-model="FullName2"><br>
+			姓名3（计算属性-双向数据绑定）：<input type="text" placeholder="full Name3" v-model="FullName3"><br>
+		</div>
+		<script type="text/javascript" src="lib/vue.js"></script>
+		<script type="text/javascript">
+			const vm = new Vue({
+				el: '#demo',
+				data: {
+					firstName: 'A',
+					lastName: 'B',
+					FullName2: 'A B', // watch属性
+				},
+				computed: {
+
+					//  计算属性FullName1(data中不需要事先定义)
+					FullName1: function() {
+						return this.firstName + ' ' + this.lastName;
+					},
+
+					/*
+						上面的写法可以简写为：只是es6的一种简写的方法，没有任何实际意义
+						FullName1() {
+							return this.firstName + ' ' + this.lastName;
+						},
+					*/
+
+					// 计算属性FullName3（双向数据绑定） 是一个对象
+					FullName3: {
+						// 回调函数：当需要读取当前属性值时回调，计算并返回当前属性的值
+						get() {
+							return this.firstName + ' ' + this.lastName;
+						},
+						// 回调函数：当属性值FullName3发生变化时回调，更新相关属性数据（firstName lastName）
+						set(value) {
+							// value就是fullName3的最新输入值
+							this.firstName = value.split(' ')[0];
+							this.lastName = value.split(' ')[1];
+						}
+					}
+				},
+				watch: {
+
+					//第一种方法：配置监视
+					//监视firstName属性（data中必须先定义）
+					firstName: function(newVal, oldVal) {
+						this.FullName2 = newVal + ' ' + this.lastName;
+					}
+				}
+			});
+
+			 /*
+			 // 第二种监听的方法
+			 // 监视lastName属性（data中必须先定义）
+			 vm.$watch('lastName', function(newVal, oldVal) {
+					 this.FullName2 = this.firstName + ' ' + newVal;
+			 });
+			 
+			 */
+		</script>
+	</body>
+</html>
